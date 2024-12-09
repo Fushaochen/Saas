@@ -29,6 +29,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
                 .eq(UserDO::getUsername, username);
 
         UserDO userDO = baseMapper.selectOne(queryWrapper);
+        if (userDO == null){
+            return null;
+        }
         UserRespDTO userRespDTO = new UserRespDTO();
         BeanUtils.copyProperties(userDO,userRespDTO);
         return userRespDTO;

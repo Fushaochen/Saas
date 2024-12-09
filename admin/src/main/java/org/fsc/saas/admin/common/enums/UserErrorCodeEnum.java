@@ -1,6 +1,7 @@
-package com.nageoffer.shortlink.admin.common.enums;
+package org.fsc.saas.admin.common.enums;
 
-import com.nageoffer.shortlink.admin.common.convention.errorcode.IErrorCode;
+
+import org.fsc.saas.admin.common.convention.errorcode.IErrorCode;
 
 /**
  * ClassName:UserErrorCodeEnum
