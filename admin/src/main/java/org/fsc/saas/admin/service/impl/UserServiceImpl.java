@@ -3,6 +3,8 @@ package org.fsc.saas.admin.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.fsc.saas.admin.common.convention.exception.ClientException;
+import org.fsc.saas.admin.common.enums.UserErrorCodeEnum;
 import org.fsc.saas.admin.dao.entity.UserDO;
 import org.fsc.saas.admin.dao.mapper.UserMapper;
 import org.fsc.saas.admin.dto.resp.UserRespDTO;
@@ -30,7 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 
         UserDO userDO = baseMapper.selectOne(queryWrapper);
         if (userDO == null){
-            return null;
+            throw new ClientException(UserErrorCodeEnum.USER_NULL);
         }
         UserRespDTO userRespDTO = new UserRespDTO();
         BeanUtils.copyProperties(userDO,userRespDTO);
