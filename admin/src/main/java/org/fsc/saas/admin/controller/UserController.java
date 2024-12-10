@@ -10,6 +10,7 @@ import org.fsc.saas.admin.dto.resp.UserRespDTO;
 import org.fsc.saas.admin.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,5 +38,9 @@ public class UserController {
     public Result<UserActualRespDTO> getActualUserByUsername(@PathVariable("username") String username){
         UserRespDTO result = userService.getUserByUsername(username);
         return Results.success(BeanUtil.toBean(result, UserActualRespDTO.class));
+    }
+    @GetMapping("/api/saas/v1/user/has-username")
+    public Result<Boolean> hasUsername(@RequestParam("username") String username){
+        return Results.success(userService.hasUsername(username));
     }
 }
