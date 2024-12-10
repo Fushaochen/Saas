@@ -1,9 +1,11 @@
 package org.fsc.saas.admin.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import lombok.RequiredArgsConstructor;
 import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.common.convention.result.Results;
 import org.fsc.saas.admin.common.enums.UserErrorCodeEnum;
+import org.fsc.saas.admin.dto.resp.UserActualRespDTO;
 import org.fsc.saas.admin.dto.resp.UserRespDTO;
 import org.fsc.saas.admin.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +30,12 @@ public class UserController {
     @GetMapping("/api/saas/v1/user/{username}")
     public Result<UserRespDTO> getUserByUsername(@PathVariable("username") String username){
         UserRespDTO result = userService.getUserByUsername(username);
-
         return Results.success(result);
+    }
+
+    @GetMapping("/api/saas/v1/actual/user/{username}")
+    public Result<UserActualRespDTO> getActualUserByUsername(@PathVariable("username") String username){
+        UserRespDTO result = userService.getUserByUsername(username);
+        return Results.success(BeanUtil.toBean(result, UserActualRespDTO.class));
     }
 }
