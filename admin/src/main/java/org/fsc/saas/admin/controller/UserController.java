@@ -5,13 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.common.convention.result.Results;
 import org.fsc.saas.admin.common.enums.UserErrorCodeEnum;
+import org.fsc.saas.admin.dto.req.UserRegisterReqDTO;
 import org.fsc.saas.admin.dto.resp.UserActualRespDTO;
 import org.fsc.saas.admin.dto.resp.UserRespDTO;
 import org.fsc.saas.admin.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * ClassName:UserController
@@ -42,5 +40,11 @@ public class UserController {
     @GetMapping("/api/saas/v1/user/has-username")
     public Result<Boolean> hasUsername(@RequestParam("username") String username){
         return Results.success(userService.hasUsername(username));
+    }
+
+    @PostMapping("/api/saas/v1/user/")
+    public Result<Void> register(@RequestBody UserRegisterReqDTO requestParam){
+        userService.register(requestParam);
+        return Results.success();
     }
 }

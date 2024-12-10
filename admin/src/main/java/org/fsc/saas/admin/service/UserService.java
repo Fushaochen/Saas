@@ -2,6 +2,7 @@ package org.fsc.saas.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.fsc.saas.admin.dao.entity.UserDO;
+import org.fsc.saas.admin.dto.req.UserRegisterReqDTO;
 import org.fsc.saas.admin.dto.resp.UserRespDTO;
 
 /**
@@ -28,4 +29,10 @@ public interface UserService extends IService<UserDO> {
      * @return
      */
     Boolean hasUsername(String username);
+
+    /**
+     * 注册用户
+     * @param requestParam
+     */
+    void register(UserRegisterReqDTO requestParam);
 }
