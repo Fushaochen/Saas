@@ -10,6 +10,7 @@ import org.fsc.saas.admin.common.enums.UserErrorCodeEnum;
 import org.fsc.saas.admin.dao.entity.UserDO;
 import org.fsc.saas.admin.dao.mapper.UserMapper;
 import org.fsc.saas.admin.dto.req.UserRegisterReqDTO;
+import org.fsc.saas.admin.dto.req.UserUpdateReqDTO;
 import org.fsc.saas.admin.dto.resp.UserRespDTO;
 import org.fsc.saas.admin.service.UserService;
 import org.redisson.api.RBloomFilter;
@@ -76,6 +77,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         }finally {
             lock.unlock();
         }
-
     }
+
+    @Override
+    public void update(UserUpdateReqDTO requestParam) {
+        LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
+                .eq(UserDO::getUsername, requestParam.getUsername());
+        baseMapper.update(BeanUtil.toBean(requestParam, UserDO.class),queryWrapper);
+    }
+
+
 }

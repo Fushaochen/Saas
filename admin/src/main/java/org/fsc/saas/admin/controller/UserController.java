@@ -6,6 +6,7 @@ import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.common.convention.result.Results;
 import org.fsc.saas.admin.common.enums.UserErrorCodeEnum;
 import org.fsc.saas.admin.dto.req.UserRegisterReqDTO;
+import org.fsc.saas.admin.dto.req.UserUpdateReqDTO;
 import org.fsc.saas.admin.dto.resp.UserActualRespDTO;
 import org.fsc.saas.admin.dto.resp.UserRespDTO;
 import org.fsc.saas.admin.service.UserService;
@@ -45,6 +46,12 @@ public class UserController {
     @PostMapping("/api/saas/v1/user/")
     public Result<Void> register(@RequestBody UserRegisterReqDTO requestParam){
         userService.register(requestParam);
+        return Results.success();
+    }
+
+    @PutMapping("/api/saas/v1/user/")
+    public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam){
+        userService.update(requestParam);
         return Results.success();
     }
 }
