@@ -42,4 +42,10 @@ public class GroupController {
         groupService.updateGroup(requestParam);
         return Results.success();
     }
+
+    @DeleteMapping("/api/saas/v1/group")
+    public Result<Void> deleteGroup(@RequestParam String gid){
+        groupService.deleteGroup(gid);
+        return Results.success();
+    }
 }
