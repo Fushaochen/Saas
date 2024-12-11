@@ -69,4 +69,11 @@ public class UserController {
         Boolean result = userService.checkLogin(username, token);
         return Results.success(result);
     }
+
+
+    @DeleteMapping("/api/saas/v1/user/logout")
+    public Result<Void> logout(@RequestParam("username") String username,@RequestParam("token") String token){
+        userService.logout(username, token);
+        return Results.success();
+    }
 }
