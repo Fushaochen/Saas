@@ -13,4 +13,7 @@ import org.fsc.saas.admin.dao.entity.GroupDO;
  * @Version: v1.0
  */
 public interface GroupService extends IService<GroupDO> {
+
+
+    void saveGroup(String groupName);
 }
