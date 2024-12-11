@@ -2,6 +2,7 @@ package org.fsc.saas.admin.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.fsc.saas.admin.common.biz.user.UserContext;
 import org.fsc.saas.admin.dao.entity.GroupDO;
 import org.fsc.saas.admin.dao.mapper.GroupMapper;
+import org.fsc.saas.admin.dto.req.ShortLinkGroupSaveReqDTO;
+import org.fsc.saas.admin.dto.req.ShortLinkGroupUpdateReqDTO;
 import org.fsc.saas.admin.dto.resp.ShortLinkGroupRespDTO;
 import org.fsc.saas.admin.service.GroupService;
 import org.fsc.saas.admin.toolkit.RandomGenerator;
@@ -54,6 +57,18 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         List<GroupDO> groupDOList = baseMapper.selectList(queryWrapper);
 
         return BeanUtil.copyToList(groupDOList, ShortLinkGroupRespDTO.class);
+    }
+
+    @Override
+    public void updateGroup(ShortLinkGroupUpdateReqDTO requestParam) {
+        LambdaUpdateWrapper<GroupDO> queryWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                .eq(GroupDO::getGid, requestParam.getGid())
+                .eq(GroupDO::getUsername, UserContext.getUsername())
+                .eq(GroupDO::getDelFlag, 0);
+        System.out.println(UserContext.getUsername());
+        GroupDO groupDO = new GroupDO();
+        groupDO.setName(requestParam.getName());
+        baseMapper.update(groupDO, queryWrapper);
     }
 
     private boolean hasGid(String gid){

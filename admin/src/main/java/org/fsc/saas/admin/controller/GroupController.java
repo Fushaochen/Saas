@@ -4,12 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.common.convention.result.Results;
 import org.fsc.saas.admin.dto.req.ShortLinkGroupSaveReqDTO;
+import org.fsc.saas.admin.dto.req.ShortLinkGroupUpdateReqDTO;
 import org.fsc.saas.admin.dto.resp.ShortLinkGroupRespDTO;
 import org.fsc.saas.admin.service.GroupService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,5 +35,11 @@ public class GroupController {
     @GetMapping("/api/saas/v1/group")
     public Result<List<ShortLinkGroupRespDTO>> listGroup(){
         return Results.success(groupService.listGroup());
+    }
+
+    @PutMapping("/api/saas/v1/group")
+    public Result<Void> updateGroup(@RequestBody ShortLinkGroupUpdateReqDTO requestParam){
+        groupService.updateGroup(requestParam);
+        return Results.success();
     }
 }
