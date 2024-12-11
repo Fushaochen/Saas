@@ -2,6 +2,9 @@ package org.fsc.saas.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.fsc.saas.admin.dao.entity.GroupDO;
+import org.fsc.saas.admin.dto.resp.ShortLinkGroupRespDTO;
+
+import java.util.List;
 
 /**
  * ClassName:GroupService
@@ -16,4 +19,6 @@ public interface GroupService extends IService<GroupDO> {
 
 
     void saveGroup(String groupName);
+
+    List<ShortLinkGroupRespDTO> listGroup();
 }
