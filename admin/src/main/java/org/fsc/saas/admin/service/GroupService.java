@@ -3,6 +3,7 @@ package org.fsc.saas.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.fsc.saas.admin.dao.entity.GroupDO;
 import org.fsc.saas.admin.dto.req.ShortLinkGroupSaveReqDTO;
+import org.fsc.saas.admin.dto.req.ShortLinkGroupSortReqDTO;
 import org.fsc.saas.admin.dto.req.ShortLinkGroupUpdateReqDTO;
 import org.fsc.saas.admin.dto.resp.ShortLinkGroupRespDTO;
 
@@ -27,4 +28,6 @@ public interface GroupService extends IService<GroupDO> {
     void updateGroup(ShortLinkGroupUpdateReqDTO requestParam);
 
     void deleteGroup(String gid);
+
+    void sortGroup(List<ShortLinkGroupSortReqDTO> requestParam);
 }
