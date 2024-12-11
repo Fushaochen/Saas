@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.common.convention.result.Results;
 import org.fsc.saas.admin.common.enums.UserErrorCodeEnum;
+import org.fsc.saas.admin.dto.req.UserLoginReqDTO;
 import org.fsc.saas.admin.dto.req.UserRegisterReqDTO;
 import org.fsc.saas.admin.dto.req.UserUpdateReqDTO;
 import org.fsc.saas.admin.dto.resp.UserActualRespDTO;
+import org.fsc.saas.admin.dto.resp.UserLoginRespDTO;
 import org.fsc.saas.admin.dto.resp.UserRespDTO;
 import org.fsc.saas.admin.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +55,12 @@ public class UserController {
     public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam){
         userService.update(requestParam);
         return Results.success();
+    }
+
+
+    @PostMapping("/api/saas/v1/user/login")
+    public Result<UserLoginRespDTO> Login(@RequestBody UserLoginReqDTO requestParam){
+        UserLoginRespDTO result = userService.login(requestParam);
+        return Results.success(result);
     }
 }
