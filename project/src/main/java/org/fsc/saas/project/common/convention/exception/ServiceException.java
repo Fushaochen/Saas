@@ -1,7 +1,8 @@
-package org.fsc.saas.admin.common.convention.exception;
+package org.fsc.saas.project.common.convention.exception;
 
-import org.fsc.saas.admin.common.convention.errorcode.BaseErrorCode;
-import org.fsc.saas.admin.common.convention.errorcode.IErrorCode;
+
+import org.fsc.saas.project.common.convention.errorcode.BaseErrorCode;
+import org.fsc.saas.project.common.convention.errorcode.IErrorCode;
 
 import java.util.Optional;
 

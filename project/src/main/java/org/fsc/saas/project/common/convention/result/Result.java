@@ -1,4 +1,4 @@
-package org.fsc.saas.admin.common.convention.result;
+package org.fsc.saas.project.common.convention.result;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

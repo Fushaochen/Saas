@@ -1,4 +1,4 @@
-package org.fsc.saas.admin.common.convention.errorcode;
+package org.fsc.saas.project.common.convention.errorcode;
 
 /**
  * ClassName:IErrorCode

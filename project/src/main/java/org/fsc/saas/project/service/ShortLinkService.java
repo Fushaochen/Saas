@@ -2,6 +2,8 @@ package org.fsc.saas.project.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.fsc.saas.project.dao.entity.ShortLinkDO;
+import org.fsc.saas.project.dto.req.ShortLinkCreateReqDTO;
+import org.fsc.saas.project.dto.resp.ShortLinkCreateRespDTO;
 
 /**
  * ClassName:ShortLinkService
@@ -13,4 +15,5 @@ import org.fsc.saas.project.dao.entity.ShortLinkDO;
  * @Version: v1.0
  */
 public interface ShortLinkService extends IService<ShortLinkDO> {
+    ShortLinkCreateRespDTO createShortLink(ShortLinkCreateReqDTO requestParam);
 }

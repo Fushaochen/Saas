@@ -1,4 +1,4 @@
-package org.fsc.saas.admin.common.database;
+package org.fsc.saas.project.common.database;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;

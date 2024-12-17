@@ -1,7 +1,8 @@
-package org.fsc.saas.admin.common.convention.exception;
+package org.fsc.saas.project.common.convention.exception;
 
-import org.fsc.saas.admin.common.convention.errorcode.BaseErrorCode;
-import org.fsc.saas.admin.common.convention.errorcode.IErrorCode;
+
+import org.fsc.saas.project.common.convention.errorcode.BaseErrorCode;
+import org.fsc.saas.project.common.convention.errorcode.IErrorCode;
 
 /**
  * ClassName:RemoteException
@@ -12,7 +13,7 @@ import org.fsc.saas.admin.common.convention.errorcode.IErrorCode;
  * @Create: 2024/12/9 - 13:02
  * @Version: v1.0
  */
-public class RemoteException extends AbstractException{
+public class RemoteException extends AbstractException {
     public RemoteException(String message) {
         this(message, null, BaseErrorCode.REMOTE_ERROR);
     }

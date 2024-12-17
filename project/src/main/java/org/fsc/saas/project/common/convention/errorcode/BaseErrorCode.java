@@ -1,4 +1,4 @@
-package org.fsc.saas.admin.common.convention.errorcode;
+package org.fsc.saas.project.common.convention.errorcode;
 
 /**
  * ClassName:BaseErrorCode
@@ -9,6 +9,7 @@ package org.fsc.saas.admin.common.convention.errorcode;
  * @Create: 2024/12/9 - 11:27
  * @Version: v1.0
  */
+
 /**
  * 基础错误码定义
  */
