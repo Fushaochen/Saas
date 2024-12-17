@@ -2,7 +2,11 @@ package org.fsc.saas.project.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.fsc.saas.project.common.database.BaseDO;
 
 import java.util.Date;
 
@@ -17,7 +21,10 @@ import java.util.Date;
  */
 @Data
 @TableName("t_link")
-public class ShortLinkDO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ShortLinkDO extends BaseDO {
 
     private Long id;
 
@@ -77,18 +84,4 @@ public class ShortLinkDO {
     @TableField("`describe`")
     private String describe;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 修改时间
-     */
-    private Date updateTime;
-
-    /**
-     * 删除标识 0：未删除 1：已删除
-     */
-    private Integer delFlag;
 }
