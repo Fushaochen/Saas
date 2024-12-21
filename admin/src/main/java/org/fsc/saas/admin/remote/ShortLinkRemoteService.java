@@ -8,9 +8,11 @@ import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkPageReqDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkCreateRespDTO;
+import org.fsc.saas.admin.remote.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkPageRespDTO;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,14 +33,22 @@ public interface ShortLinkRemoteService {
         requestMap.put("size", requestParam.getCurrent());
         String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/page", requestMap);
 
-        return JSON.parseObject(resultPage, new TypeReference<Result<IPage<ShortLinkPageRespDTO>>>() {
+        return JSON.parseObject(resultPage, new TypeReference<>() {
         });
     }
 
     default Result<ShortLinkCreateRespDTO> createShortLink(ShortLinkCreateReqDTO requestParam){
         String resultBodyStr = HttpUtil.post("http://127.0.0.1:8001/api/saas/v1/create", JSON.toJSONString(requestParam));
-        return JSON.parseObject(resultBodyStr, new TypeReference<Result<ShortLinkCreateRespDTO>>() {
+        return JSON.parseObject(resultBodyStr, new TypeReference<>() {
         });
-
     }
+
+    default Result<List<ShortLinkGroupCountQueryRespDTO>> listGroupShortLinkCount(List<String> requestParam){
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("requestParam",requestParam);
+        String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/count", requestMap);
+        return JSON.parseObject(resultPage, new TypeReference<>() {
+        });
+    }
+
 }
