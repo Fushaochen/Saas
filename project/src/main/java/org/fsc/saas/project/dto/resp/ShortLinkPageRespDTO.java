@@ -1,6 +1,7 @@
 package org.fsc.saas.project.dto.resp;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -38,8 +39,6 @@ public class ShortLinkPageRespDTO {
      */
     private String originUrl;
 
-
-
     /**
      * 分组标识
      */
@@ -53,7 +52,11 @@ public class ShortLinkPageRespDTO {
     /**
      * 有效期
      */
+    @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date validDate;
+
+    @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date createTime;
 
     /**
      * 描述
