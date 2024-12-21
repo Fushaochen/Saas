@@ -1,6 +1,10 @@
 package org.fsc.saas.project.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.fsc.saas.project.common.convention.result.Result;
 import org.fsc.saas.project.common.convention.result.Results;
@@ -11,6 +15,7 @@ import org.fsc.saas.project.dto.resp.ShortLinkCreateRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkPageRespDTO;
 import org.fsc.saas.project.service.ShortLinkService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +34,11 @@ import java.util.List;
 public class ShortLinkController {
 
     private final ShortLinkService shortLinkService;
+
+    @GetMapping("/{short-uri}")
+    public void restoreUrl(@PathVariable("short-uri") String shortUri, ServletRequest request, ServletResponse response){
+        shortLinkService.restoreUrl(shortUri, request, response);
+    }
 
     @PostMapping("/api/saas/v1/create")
     public Result<ShortLinkCreateRespDTO> createShortLink(@RequestBody ShortLinkCreateReqDTO requestParam){

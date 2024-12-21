@@ -18,6 +18,7 @@ import java.util.Date;
 public class ShortLinkCreateReqDTO {
 
 
+
     /**
      * 域名
      */
