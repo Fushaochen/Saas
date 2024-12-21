@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.fsc.saas.project.dao.entity.ShortLinkDO;
 import org.fsc.saas.project.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkPageReqDTO;
+import org.fsc.saas.project.dto.req.ShortLinkUpdateDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkCreateRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkPageRespDTO;
@@ -26,4 +27,6 @@ public interface ShortLinkService extends IService<ShortLinkDO> {
     IPage<ShortLinkPageRespDTO> pageShortLink(ShortLinkPageReqDTO requestParam);
 
     List<ShortLinkGroupCountQueryRespDTO> listGroupShortLinkCount(List<String> requestParam);
+
+    void updateShortLink(ShortLinkUpdateDTO requestParam);
 }

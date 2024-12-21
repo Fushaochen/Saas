@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkPageReqDTO;
+import org.fsc.saas.admin.remote.dto.req.ShortLinkUpdateDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkCreateRespDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkPageRespDTO;
@@ -51,4 +52,8 @@ public interface ShortLinkRemoteService {
         });
     }
 
+    default void updateShortLink(ShortLinkUpdateDTO requestParam){
+        String resultBodyStr = HttpUtil.post("http://127.0.0.1:8001/api/saas/v1/update", JSON.toJSONString(requestParam));
+
+    }
 }

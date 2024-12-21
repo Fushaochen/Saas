@@ -6,6 +6,7 @@ import org.fsc.saas.project.common.convention.result.Result;
 import org.fsc.saas.project.common.convention.result.Results;
 import org.fsc.saas.project.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkPageReqDTO;
+import org.fsc.saas.project.dto.req.ShortLinkUpdateDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkCreateRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkPageRespDTO;
@@ -43,6 +44,12 @@ public class ShortLinkController {
     @GetMapping("/api/saas/v1/count")
     public Result<List<ShortLinkGroupCountQueryRespDTO>> listGroupShortLinkCount(@RequestParam("requestParam") List<String> requestParam){
         return Results.success(shortLinkService.listGroupShortLinkCount(requestParam));
+    }
+
+    @PostMapping("/api/saas/v1/update")
+    public Result<Void> updateShortLink(@RequestBody ShortLinkUpdateDTO requestParam){
+        shortLinkService.updateShortLink(requestParam);
+        return Results.success();
     }
 
 }
