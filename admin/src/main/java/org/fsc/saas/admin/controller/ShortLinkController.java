@@ -2,8 +2,7 @@ package org.fsc.saas.admin.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.fsc.saas.admin.common.convention.result.Result;
-import org.fsc.saas.admin.common.convention.result.Results;
-import org.fsc.saas.admin.remote.dto.ShortLinkRemoteService;
+import org.fsc.saas.admin.remote.ShortLinkRemoteService;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkPageReqDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkCreateRespDTO;
