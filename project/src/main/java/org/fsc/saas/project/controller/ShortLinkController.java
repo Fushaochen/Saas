@@ -7,12 +7,12 @@ import org.fsc.saas.project.common.convention.result.Results;
 import org.fsc.saas.project.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkPageReqDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkCreateRespDTO;
+import org.fsc.saas.project.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkPageRespDTO;
 import org.fsc.saas.project.service.ShortLinkService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * ClassName:ShortLinkController
@@ -38,6 +38,11 @@ public class ShortLinkController {
     @GetMapping("/api/saas/v1/page")
     public Result<IPage<ShortLinkPageRespDTO>> pageShortLink(ShortLinkPageReqDTO requestParam){
         return Results.success(shortLinkService.pageShortLink(requestParam));
+    }
+
+    @GetMapping("/api/saas/v1/count")
+    public Result<List<ShortLinkGroupCountQueryRespDTO>> listGroupShortLinkCount(@RequestParam("requestParam") List<String> requestParam){
+        return Results.success(shortLinkService.listGroupShortLinkCount(requestParam));
     }
 
 }
