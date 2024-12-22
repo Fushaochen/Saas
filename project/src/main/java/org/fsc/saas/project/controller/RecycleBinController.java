@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.RequiredArgsConstructor;
 import org.fsc.saas.project.common.convention.result.Result;
 import org.fsc.saas.project.common.convention.result.Results;
+import org.fsc.saas.project.dto.req.RecycleBinRecoverReqDTO;
 import org.fsc.saas.project.dto.req.RecycleBinSaveReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkPageReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkRecycleBinPageReqDTO;
@@ -44,5 +45,11 @@ public class RecycleBinController {
         List<String> gidList = requestParam.getGidList();
         IPage<ShortLinkPageRespDTO> shortLinkPageRespDTOIPage = recycleBinService.pageShortLink(requestParam);
         return Results.success(shortLinkPageRespDTOIPage);
+    }
+
+    @PostMapping("/api/saas/v1/recycle-bin/recover")
+    public Result<Void> recoverRecycleBin(@RequestBody RecycleBinRecoverReqDTO requestParam){
+        recycleBinService.recoverRecycleBin(requestParam);
+        return Results.success();
     }
 }
