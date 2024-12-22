@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.common.convention.result.Results;
 import org.fsc.saas.admin.dto.req.RecycleBinRecoverReqDTO;
+import org.fsc.saas.admin.dto.req.RecycleBinRemoveReqDTO;
 import org.fsc.saas.admin.dto.req.RecycleBinSaveReqDTO;
 import org.fsc.saas.admin.remote.ShortLinkRemoteService;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkPageReqDTO;
@@ -49,6 +50,12 @@ public class RecycleBinController {
     @PostMapping("/api/saas/admin/v1/recycle-bin/recover")
     public Result<Void> recoverRecycleBin(@RequestBody RecycleBinRecoverReqDTO requestParam){
         shortLinkRemoteService.recoverRecycleBin(requestParam);
+        return Results.success();
+    }
+
+    @PostMapping("/api/saas/admin/v1/recycle-bin/remove")
+    public Result<Void> removeRecycleBin(@RequestBody RecycleBinRemoveReqDTO requestParam){
+        shortLinkRemoteService.removeRecycleBin(requestParam);
         return Results.success();
     }
 }

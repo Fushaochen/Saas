@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.RequiredArgsConstructor;
 import org.fsc.saas.project.common.convention.result.Result;
 import org.fsc.saas.project.common.convention.result.Results;
-import org.fsc.saas.project.dto.req.RecycleBinRecoverReqDTO;
-import org.fsc.saas.project.dto.req.RecycleBinSaveReqDTO;
-import org.fsc.saas.project.dto.req.ShortLinkPageReqDTO;
-import org.fsc.saas.project.dto.req.ShortLinkRecycleBinPageReqDTO;
+import org.fsc.saas.project.dto.req.*;
 import org.fsc.saas.project.dto.resp.ShortLinkPageRespDTO;
 import org.fsc.saas.project.service.RecycleBinService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +47,12 @@ public class RecycleBinController {
     @PostMapping("/api/saas/v1/recycle-bin/recover")
     public Result<Void> recoverRecycleBin(@RequestBody RecycleBinRecoverReqDTO requestParam){
         recycleBinService.recoverRecycleBin(requestParam);
+        return Results.success();
+    }
+
+    @PostMapping("/api/saas/v1/recycle-bin/remove")
+    public Result<Void> removeRecycleBin(@RequestBody RecycleBinRemoveReqDTO requestParam){
+        recycleBinService.removeRecycleBin(requestParam);
         return Results.success();
     }
 }
