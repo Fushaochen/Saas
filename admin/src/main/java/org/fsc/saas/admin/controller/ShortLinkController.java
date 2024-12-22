@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class ShortLinkController {
 
-    ShortLinkRemoteService shortLinkRemoteService = new ShortLinkRemoteService(){
+    ShortLinkRemoteService shortLinkRemoteService = new ShortLinkRemoteService() {
     };
 
     @GetMapping("/api/saas/admin/v1/page")

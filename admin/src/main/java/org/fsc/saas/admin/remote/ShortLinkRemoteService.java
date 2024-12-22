@@ -32,7 +32,7 @@ public interface ShortLinkRemoteService {
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put("gid",requestParam.getGid());
         requestMap.put("current", requestParam.getCurrent());
-        requestMap.put("size", requestParam.getCurrent());
+        requestMap.put("size", requestParam.getSize());
         String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/page", requestMap);
 
         return JSON.parseObject(resultPage, new TypeReference<>() {
@@ -66,5 +66,16 @@ public interface ShortLinkRemoteService {
     default void saveRecycleBin(RecycleBinSaveReqDTO requestParam){
         HttpUtil.post("http://127.0.0.1:8001/api/saas/v1/recycle-bin/save", JSON.toJSONString(requestParam));
 
+    }
+
+    default Result<IPage<ShortLinkPageRespDTO>> pageRecycleBinShortLink(ShortLinkPageReqDTO requestParam){
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("gid",requestParam.getGid());
+        requestMap.put("current", requestParam.getCurrent());
+        requestMap.put("size", requestParam.getSize());
+        String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/recycle-bin/page", requestMap);
+
+        return JSON.parseObject(resultPage, new TypeReference<>() {
+        });
     }
 }
