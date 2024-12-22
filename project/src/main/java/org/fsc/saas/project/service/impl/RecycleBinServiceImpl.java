@@ -11,10 +11,14 @@ import org.fsc.saas.project.dao.entity.ShortLinkDO;
 import org.fsc.saas.project.dao.mapper.ShortLinkMapper;
 import org.fsc.saas.project.dto.req.RecycleBinSaveReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkPageReqDTO;
+import org.fsc.saas.project.dto.req.ShortLinkRecycleBinPageReqDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkPageRespDTO;
 import org.fsc.saas.project.service.RecycleBinService;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.fsc.saas.project.common.constant.RedisKeyConstant.GOTO_SHORT_LINK_KEY;
 
@@ -51,9 +55,10 @@ public class RecycleBinServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLin
     }
 
     @Override
-    public IPage<ShortLinkPageRespDTO> pageShortLink(ShortLinkPageReqDTO requestParam) {
+    public IPage<ShortLinkPageRespDTO> pageShortLink(ShortLinkRecycleBinPageReqDTO requestParam) {
+
         LambdaQueryWrapper<ShortLinkDO> queryWrapper = Wrappers.lambdaQuery(ShortLinkDO.class)
-                .eq(ShortLinkDO::getGid, requestParam.getGid())
+                .in(ShortLinkDO::getGid, requestParam.getGidList())
                 .eq(ShortLinkDO::getEnableStatus, 1)
                 .eq(ShortLinkDO::getDelFlag, 0);
         IPage<ShortLinkDO> resultPage = baseMapper.selectPage(requestParam, queryWrapper);

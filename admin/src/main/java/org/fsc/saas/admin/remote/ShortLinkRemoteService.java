@@ -8,6 +8,7 @@ import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.dto.req.RecycleBinSaveReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkPageReqDTO;
+import org.fsc.saas.admin.remote.dto.req.ShortLinkRecycleBinPageReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkUpdateDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkCreateRespDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkGroupCountQueryRespDTO;
@@ -68,9 +69,9 @@ public interface ShortLinkRemoteService {
 
     }
 
-    default Result<IPage<ShortLinkPageRespDTO>> pageRecycleBinShortLink(ShortLinkPageReqDTO requestParam){
+    default Result<IPage<ShortLinkPageRespDTO>> pageRecycleBinShortLink(ShortLinkRecycleBinPageReqDTO requestParam){
         Map<String, Object> requestMap = new HashMap<>();
-        requestMap.put("gid",requestParam.getGid());
+        requestMap.put("gidList", requestParam.getGidList());
         requestMap.put("current", requestParam.getCurrent());
         requestMap.put("size", requestParam.getSize());
         String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/recycle-bin/page", requestMap);

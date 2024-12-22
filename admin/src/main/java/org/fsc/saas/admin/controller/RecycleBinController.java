@@ -7,11 +7,15 @@ import org.fsc.saas.admin.common.convention.result.Results;
 import org.fsc.saas.admin.dto.req.RecycleBinSaveReqDTO;
 import org.fsc.saas.admin.remote.ShortLinkRemoteService;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkPageReqDTO;
+import org.fsc.saas.admin.remote.dto.req.ShortLinkRecycleBinPageReqDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkPageRespDTO;
+import org.fsc.saas.admin.service.RecycleBinService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * ClassName:RecycleBinController
@@ -26,17 +30,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RecycleBinController {
 
+    private final RecycleBinService recycleBinService;
     ShortLinkRemoteService shortLinkRemoteService = new ShortLinkRemoteService(){
     };
 
-    @PostMapping("/api/saas/v1/recycle-bin/save")
+    @PostMapping("/api/saas/admin/v1/recycle-bin/save")
     public Result<Void> saveRecycleBin(@RequestBody RecycleBinSaveReqDTO requestParam){
         shortLinkRemoteService.saveRecycleBin(requestParam);
         return Results.success();
     }
 
     @GetMapping("/api/saas/admin/v1/recycle-bin/page")
-    public Result<IPage<ShortLinkPageRespDTO>> pageShortLink(ShortLinkPageReqDTO requestParam){
-        return shortLinkRemoteService.pageRecycleBinShortLink(requestParam);
+    public Result<IPage<ShortLinkPageRespDTO>> pageShortLink(ShortLinkRecycleBinPageReqDTO requestParam){
+        return recycleBinService.pageRecycleBinShortLink(requestParam);
     }
 }

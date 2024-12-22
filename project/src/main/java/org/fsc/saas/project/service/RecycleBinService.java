@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.fsc.saas.project.dao.entity.ShortLinkDO;
 import org.fsc.saas.project.dto.req.RecycleBinSaveReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkPageReqDTO;
+import org.fsc.saas.project.dto.req.ShortLinkRecycleBinPageReqDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkPageRespDTO;
 
 /**
@@ -20,6 +21,6 @@ public interface RecycleBinService extends IService<ShortLinkDO> {
 
     void saveRecycleBin(RecycleBinSaveReqDTO requestParam);
 
-    IPage<ShortLinkPageRespDTO> pageShortLink(ShortLinkPageReqDTO requestParam);
+    IPage<ShortLinkPageRespDTO> pageShortLink(ShortLinkRecycleBinPageReqDTO requestParam);
 
 }
