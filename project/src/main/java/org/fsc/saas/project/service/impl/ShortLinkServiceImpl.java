@@ -29,6 +29,7 @@ import org.fsc.saas.project.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkPageRespDTO;
 import org.fsc.saas.project.service.ShortLinkService;
 import org.fsc.saas.project.toolkit.HashUtil;
+import org.fsc.saas.project.toolkit.LinkUtil;
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -96,6 +97,7 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
                 throw new ServiceException("短链接生成重复");
             }
         }
+        stringRedisTemplate.opsForValue().set(fullShortUrl, requestParam.getOriginUrl(), LinkUtil.getLinkCacheValidDate(requestParam.getValidDate()), TimeUnit.MILLISECONDS);
         shortUriCreateCachePenetrationBloomFilter.add(fullShortUrl);
         return ShortLinkCreateRespDTO.builder()
                 .domain(requestParam.getDomain())
