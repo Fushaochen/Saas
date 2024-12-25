@@ -12,4 +12,6 @@ package org.fsc.saas.project.common.constant;
 public class ShortLinkConstant {
 
     public static final long DEFAULT_CACHE_VALID_TIME = 2629800000L;
+
+    public static final String AMAP_REMOTE_URL = "https://restapi.amap.com/v3/ip";
 }
