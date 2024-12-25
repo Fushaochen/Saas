@@ -108,4 +108,9 @@ public class LinkUtil {
         }
         return "PC";
     }
+
+    public static String getNetwork(HttpServletRequest request) {
+        String actualIp = getActualIp(request);
+        return actualIp.startsWith("192.168.") || actualIp.startsWith("10.") ? "WIFI" : "Mobile web";
+    }
 }
