@@ -27,14 +27,8 @@ import org.checkerframework.checker.units.qual.C;
 import org.fsc.saas.project.common.convention.exception.ClientException;
 import org.fsc.saas.project.common.convention.exception.ServiceException;
 import org.fsc.saas.project.common.enums.VailDateTypeEnum;
-import org.fsc.saas.project.dao.entity.LinkAccessStatsDO;
-import org.fsc.saas.project.dao.entity.LinkLocaleStatsDO;
-import org.fsc.saas.project.dao.entity.ShortLinkDO;
-import org.fsc.saas.project.dao.entity.ShortLinkGotoDO;
-import org.fsc.saas.project.dao.mapper.LinkAccessStatsMapper;
-import org.fsc.saas.project.dao.mapper.LinkLocaleStatsMapper;
-import org.fsc.saas.project.dao.mapper.ShortLinkGotoMapper;
-import org.fsc.saas.project.dao.mapper.ShortLinkMapper;
+import org.fsc.saas.project.dao.entity.*;
+import org.fsc.saas.project.dao.mapper.*;
 import org.fsc.saas.project.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkPageReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkUpdateDTO;
@@ -86,6 +80,7 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
     private final RedissonClient redissonClient;
     private final LinkAccessStatsMapper linkAccessStatsMapper;
     private final LinkLocaleStatsMapper linkLocaleStatsMapper;
+    private final LinkOsStatsMapper linkOsStatsMapper;
 
     @Value("${short-link.stats.locale.amap-key}")
     private String statsLocaleAmapKey;
@@ -339,6 +334,14 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
                         .date(new Date())
                         .build();
                 linkLocaleStatsMapper.shortLinkLocaleStats(linkLocaleStatsDO);
+                LinkOsStatsDO linkOsStatsDO = LinkOsStatsDO.builder()
+                        .os(LinkUtil.getOs((HttpServletRequest) request))
+                        .gid(gid)
+                        .fullShortUrl(fullShortUrl)
+                        .date(new Date())
+                        .cnt(1)
+                        .build();
+                linkOsStatsMapper.shortLinkOsStats(linkOsStatsDO);
             }
         }catch (Throwable ex){
             log.error("短链接访问量统计异常",ex);
