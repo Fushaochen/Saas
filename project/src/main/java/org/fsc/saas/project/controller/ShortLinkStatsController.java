@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.yetus.audience.InterfaceAudience;
 import org.fsc.saas.project.common.convention.result.Result;
 import org.fsc.saas.project.common.convention.result.Results;
+import org.fsc.saas.project.dto.req.ShortLinkGroupStatsAccessRecordReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkGroupStatsReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkStatsAccessRecordReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkStatsReqDTO;
@@ -46,5 +47,13 @@ public class ShortLinkStatsController {
     @GetMapping("/api/saas/v1/stats/access-record")
     public Result<IPage<ShortLinkStatsAccessRecordRespDTO>> shortLinkStatsAccessRecord(ShortLinkStatsAccessRecordReqDTO requestParam){
         return Results.success(shortLinkStatsService.shortLinkStatsAccessRecord(requestParam));
+    }
+
+    /**
+     * 访问分组短链接指定时间内访问记录监控数据
+     */
+    @GetMapping("/api/saas/v1/stats/access-record/group")
+    public Result<IPage<ShortLinkStatsAccessRecordRespDTO>> groupShortLinkStatsAccessRecord(ShortLinkGroupStatsAccessRecordReqDTO requestParam) {
+        return Results.success(shortLinkStatsService.groupShortLinkStatsAccessRecord(requestParam));
     }
 }
