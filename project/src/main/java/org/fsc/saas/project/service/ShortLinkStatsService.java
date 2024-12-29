@@ -1,8 +1,11 @@
 package org.fsc.saas.project.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.fsc.saas.project.dao.entity.ShortLinkDO;
+import org.fsc.saas.project.dto.req.ShortLinkStatsAccessRecordReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkStatsReqDTO;
+import org.fsc.saas.project.dto.resp.ShortLinkStatsAccessRecordRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkStatsRespDTO;
 
 /**
@@ -22,4 +25,6 @@ public interface ShortLinkStatsService{
      * @return 短链接监控数据
      */
     ShortLinkStatsRespDTO oneShortLinkStats(ShortLinkStatsReqDTO requestParam);
+
+    IPage<ShortLinkStatsAccessRecordRespDTO> shortLinkStatsAccessRecord(ShortLinkStatsAccessRecordReqDTO requestParam);
 }

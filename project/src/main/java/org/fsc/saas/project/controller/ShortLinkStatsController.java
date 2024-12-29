@@ -1,10 +1,13 @@
 package org.fsc.saas.project.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.RequiredArgsConstructor;
 import org.apache.yetus.audience.InterfaceAudience;
 import org.fsc.saas.project.common.convention.result.Result;
 import org.fsc.saas.project.common.convention.result.Results;
+import org.fsc.saas.project.dto.req.ShortLinkStatsAccessRecordReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkStatsReqDTO;
+import org.fsc.saas.project.dto.resp.ShortLinkStatsAccessRecordRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkStatsRespDTO;
 import org.fsc.saas.project.service.ShortLinkStatsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,5 +33,10 @@ public class ShortLinkStatsController {
     @GetMapping("/api/saas/v1/stats")
     public Result<ShortLinkStatsRespDTO> shortLinkStats(ShortLinkStatsReqDTO requestParam){
         return Results.success(shortLinkStatsService.oneShortLinkStats(requestParam));
+    }
+
+    @GetMapping("/api/saas/v1/stats/access-record")
+    public Result<IPage<ShortLinkStatsAccessRecordRespDTO>> shortLinkStatsAccessRecord(ShortLinkStatsAccessRecordReqDTO requestParam){
+        return Results.success(shortLinkStatsService.shortLinkStatsAccessRecord(requestParam));
     }
 }
