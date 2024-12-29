@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.fsc.saas.project.dao.entity.LinkAccessLogsDO;
+import org.fsc.saas.project.dao.entity.LinkAccessStatsDO;
 import org.fsc.saas.project.dto.req.ShortLinkStatsAccessRecordReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkStatsReqDTO;
 
@@ -98,4 +99,12 @@ public interface LinkAccessLogsMapper extends BaseMapper<LinkAccessLogsDO> {
             @Param("endDate") String endDate,
             @Param("userAccessLogsList") List<String> userAccessLogsList
     );
+
+    @Select(""" 
+    SELECT COUNT(user) AS pv, COUNT(DISTINCT user) AS uv, COUNT(DISTINCT ip) AS uip
+    FROM t_link_access_logs
+    WHERE full_short_url = #{param.fullShortUrl} AND gid = #{param.gid} AND create_time BETWEEN #{param.startDate} AND #{param.endDate}
+    GROUP BY full_short_url, gid; 
+    """)
+    LinkAccessStatsDO findPvUvUidStatsByShortLink(@Param("param") ShortLinkStatsReqDTO requestParam);
 }

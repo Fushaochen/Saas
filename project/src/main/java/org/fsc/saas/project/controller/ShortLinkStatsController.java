@@ -32,7 +32,9 @@ public class ShortLinkStatsController {
 
     @GetMapping("/api/saas/v1/stats")
     public Result<ShortLinkStatsRespDTO> shortLinkStats(ShortLinkStatsReqDTO requestParam){
-        return Results.success(shortLinkStatsService.oneShortLinkStats(requestParam));
+        System.out.println("temp");
+        ShortLinkStatsRespDTO shortLinkStatsRespDTO = shortLinkStatsService.oneShortLinkStats(requestParam);
+        return Results.success(shortLinkStatsRespDTO);
     }
 
     @GetMapping("/api/saas/v1/stats/access-record")

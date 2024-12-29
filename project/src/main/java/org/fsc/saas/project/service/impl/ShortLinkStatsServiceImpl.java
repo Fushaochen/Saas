@@ -50,6 +50,8 @@ public class ShortLinkStatsServiceImpl implements ShortLinkStatsService {
             return null;
         }
         //基础访问详情
+        LinkAccessStatsDO pvUvUidStatsByShortLink = linkAccessLogsMapper.findPvUvUidStatsByShortLink(requestParam);
+
         List<ShortLinkStatsAccessDailyRespDTO> daily = new ArrayList<>();
         List<String> rangeDates = DateUtil.rangeToList(DateUtil.parse(requestParam.getStartDate()), DateUtil.parse(requestParam.getEndDate()), DateField.DAY_OF_MONTH).stream()
                 .map(DateUtil::formatDate)
@@ -221,6 +223,9 @@ public class ShortLinkStatsServiceImpl implements ShortLinkStatsService {
             networkStats.add(networkRespDTO);
         });
         return ShortLinkStatsRespDTO.builder()
+                .pv(pvUvUidStatsByShortLink.getPv())
+                .uv(pvUvUidStatsByShortLink.getUv())
+                .uip(pvUvUidStatsByShortLink.getUip())
                 .daily(daily)
                 .localeCnStats(localeCnStats)
                 .hourStats(hourStats)
