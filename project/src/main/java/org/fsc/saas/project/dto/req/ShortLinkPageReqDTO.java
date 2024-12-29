@@ -17,4 +17,6 @@ import org.fsc.saas.project.dao.entity.ShortLinkDO;
 public class ShortLinkPageReqDTO extends Page<ShortLinkDO> {
 
     private String gid;
+
+    private String orderTag;
 }

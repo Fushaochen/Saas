@@ -2,6 +2,7 @@ package org.fsc.saas.project.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import groovy.transform.Internal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -91,8 +92,17 @@ public class ShortLinkDO extends BaseDO {
 
     private Integer totalPv;
 
+    @TableField(exist = false)
+    private Integer todayPv;
+
     private Integer totalUv;
 
+    @TableField(exist = false)
+    private Integer todayUv;
+
     private Integer totalUip;
+
+    @TableField(exist = false)
+    private Integer todayUip;
 
 }
