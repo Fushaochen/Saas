@@ -15,6 +15,7 @@ import org.fsc.saas.admin.remote.dto.req.ShortLinkUpdateDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkCreateRespDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkPageRespDTO;
+import org.fsc.saas.admin.remote.dto.resp.ShortLinkStatsRespDTO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -90,4 +91,17 @@ public interface ShortLinkRemoteService {
         HttpUtil.post("http://127.0.0.1:8001/api/saas/v1/recycle-bin/remove", JSON.toJSONString(requestParam));
 
     }
+
+    default Result<ShortLinkStatsRespDTO> oneShortLinkStats(String fullShortUrl, String gid, Integer enableStatus, String startDate, String endDate){
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("fullShortUrl", fullShortUrl);
+        requestMap.put("gid", gid);
+        requestMap.put("enableStatus", enableStatus);
+        requestMap.put("startDate", startDate);
+        requestMap.put("endDate", endDate);
+        String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/stats", requestMap);
+
+        return JSON.parseObject(resultPage, new TypeReference<>() {
+        });
+    };
 }
