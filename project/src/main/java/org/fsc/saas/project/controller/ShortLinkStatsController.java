@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.yetus.audience.InterfaceAudience;
 import org.fsc.saas.project.common.convention.result.Result;
 import org.fsc.saas.project.common.convention.result.Results;
+import org.fsc.saas.project.dto.req.ShortLinkGroupStatsReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkStatsAccessRecordReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkStatsReqDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkStatsAccessRecordRespDTO;
@@ -35,6 +36,11 @@ public class ShortLinkStatsController {
         System.out.println("temp");
         ShortLinkStatsRespDTO shortLinkStatsRespDTO = shortLinkStatsService.oneShortLinkStats(requestParam);
         return Results.success(shortLinkStatsRespDTO);
+    }
+
+    @GetMapping("/api/saas/v1/stats/group")
+    public Result<ShortLinkStatsRespDTO> groupShortLinkStats(ShortLinkGroupStatsReqDTO requestParam) {
+        return Results.success(shortLinkStatsService.groupShortLinkStats(requestParam));
     }
 
     @GetMapping("/api/saas/v1/stats/access-record")
