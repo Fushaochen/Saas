@@ -118,4 +118,15 @@ public interface ShortLinkRemoteService {
         return JSON.parseObject(resultPage, new TypeReference<>() {
         });
     };
+
+    default Result<ShortLinkStatsRespDTO> groupShortLinkStats(String gid, String startDate, String endDate){
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("gid", gid);
+        requestMap.put("startDate", startDate);
+        requestMap.put("endDate", endDate);
+        String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/stats/group", requestMap);
+
+        return JSON.parseObject(resultPage, new TypeReference<>() {
+        });
+    };
 }

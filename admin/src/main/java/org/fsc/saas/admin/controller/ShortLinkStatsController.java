@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.remote.ShortLinkRemoteService;
+import org.fsc.saas.admin.remote.dto.req.ShortLinkGroupStatsReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkStatsAccessRecordReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkStatsReqDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkStatsAccessRecordRespDTO;
@@ -36,6 +37,15 @@ public class ShortLinkStatsController {
                 requestParam.getFullShortUrl(),
                 requestParam.getGid(),
                 requestParam.getEnableStatus(),
+                requestParam.getStartDate(),
+                requestParam.getEndDate()
+        );
+    }
+
+    @GetMapping("/api/saas/admin/v1/stats/group")
+    public Result<ShortLinkStatsRespDTO> groupShortLinkStats(ShortLinkGroupStatsReqDTO requestParam) {
+        return shortLinkRemoteService.groupShortLinkStats(
+                requestParam.getGid(),
                 requestParam.getStartDate(),
                 requestParam.getEndDate()
         );
