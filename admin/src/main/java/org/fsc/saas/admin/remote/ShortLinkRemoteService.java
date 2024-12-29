@@ -4,6 +4,7 @@ import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.dto.req.RecycleBinRecoverReqDTO;
 import org.fsc.saas.admin.dto.req.RecycleBinRemoveReqDTO;
@@ -12,10 +13,7 @@ import org.fsc.saas.admin.remote.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkPageReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkRecycleBinPageReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkUpdateDTO;
-import org.fsc.saas.admin.remote.dto.resp.ShortLinkCreateRespDTO;
-import org.fsc.saas.admin.remote.dto.resp.ShortLinkGroupCountQueryRespDTO;
-import org.fsc.saas.admin.remote.dto.resp.ShortLinkPageRespDTO;
-import org.fsc.saas.admin.remote.dto.resp.ShortLinkStatsRespDTO;
+import org.fsc.saas.admin.remote.dto.resp.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -100,6 +98,21 @@ public interface ShortLinkRemoteService {
         requestMap.put("startDate", startDate);
         requestMap.put("endDate", endDate);
         String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/stats", requestMap);
+
+        return JSON.parseObject(resultPage, new TypeReference<>() {
+        });
+    };
+
+    default Result<Page<ShortLinkStatsAccessRecordRespDTO>> shortLinkStatsAccessRecord(String fullShortUrl, String gid, String startDate, String endDate, Integer enableStatus, long current, long size){
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("fullShortUrl", fullShortUrl);
+        requestMap.put("gid", gid);
+        requestMap.put("enableStatus", enableStatus);
+        requestMap.put("startDate", startDate);
+        requestMap.put("endDate", endDate);
+        requestMap.put("current", current);
+        requestMap.put("size", size);
+        String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/stats/access-record", requestMap);
 
         return JSON.parseObject(resultPage, new TypeReference<>() {
         });
