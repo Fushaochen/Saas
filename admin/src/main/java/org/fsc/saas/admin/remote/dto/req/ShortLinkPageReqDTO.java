@@ -16,4 +16,6 @@ import lombok.Data;
 public class ShortLinkPageReqDTO extends Page {
 
     private String gid;
+
+    private String orderTag;
 }
