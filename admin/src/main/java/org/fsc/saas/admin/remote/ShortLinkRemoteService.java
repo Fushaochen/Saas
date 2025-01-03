@@ -9,10 +9,7 @@ import org.fsc.saas.admin.common.convention.result.Result;
 import org.fsc.saas.admin.dto.req.RecycleBinRecoverReqDTO;
 import org.fsc.saas.admin.dto.req.RecycleBinRemoveReqDTO;
 import org.fsc.saas.admin.dto.req.RecycleBinSaveReqDTO;
-import org.fsc.saas.admin.remote.dto.req.ShortLinkCreateReqDTO;
-import org.fsc.saas.admin.remote.dto.req.ShortLinkPageReqDTO;
-import org.fsc.saas.admin.remote.dto.req.ShortLinkRecycleBinPageReqDTO;
-import org.fsc.saas.admin.remote.dto.req.ShortLinkUpdateDTO;
+import org.fsc.saas.admin.remote.dto.req.*;
 import org.fsc.saas.admin.remote.dto.resp.*;
 
 import java.util.HashMap;
@@ -137,6 +134,12 @@ public interface ShortLinkRemoteService {
         requestMap.put("endDate", endDate);
         String resultPage = HttpUtil.get("http://127.0.0.1:8001/api/saas/v1/stats/access-record/group", requestMap);
 
+        return JSON.parseObject(resultPage, new TypeReference<>() {
+        });
+    }
+
+    default Result<ShortLinkBatchCreateRespDTO> batchCreateShortLink(ShortLinkBatchCreateReqDTO requestParam){
+        String resultPage = HttpUtil.post("http://127.0.0.1:8001/api/saas/v1/create/batch", JSON.toJSONString(requestParam));
         return JSON.parseObject(resultPage, new TypeReference<>() {
         });
     }
