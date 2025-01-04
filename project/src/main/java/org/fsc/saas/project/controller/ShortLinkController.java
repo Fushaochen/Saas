@@ -1,5 +1,6 @@
 package org.fsc.saas.project.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -14,6 +15,7 @@ import org.fsc.saas.project.dto.resp.ShortLinkBatchCreateRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkCreateRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkGroupCountQueryRespDTO;
 import org.fsc.saas.project.dto.resp.ShortLinkPageRespDTO;
+import org.fsc.saas.project.handler.CustomBlockHandler;
 import org.fsc.saas.project.service.ShortLinkService;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,6 +50,11 @@ public class ShortLinkController {
     }
 
     @PostMapping("/api/saas/v1/create")
+    @SentinelResource(
+            value = "create_short-link",
+            blockHandler = "createShortLinkBlockHandlerMethod",
+            blockHandlerClass = CustomBlockHandler.class
+    )
     public Result<ShortLinkCreateRespDTO> createShortLink(@RequestBody ShortLinkCreateReqDTO requestParam){
         ShortLinkCreateRespDTO shortLinkCreateRespDTO = shortLinkService.createShortLink(requestParam);
         return Results.success(shortLinkCreateRespDTO);
