@@ -16,4 +16,7 @@ public class RedisCacheConstant {
 
     public static final String LOCK_USER_REGISTER_KEY = "saas:lock_user-register:";
 
+
+    public static final String LOCK_GROUP_CREATE_KEY = "saas:lock_group-create:%s";
+
 }
