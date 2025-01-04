@@ -15,7 +15,7 @@ import java.util.Date;
  * @Version: v1.0
  */
 @Data
-public class ShortLinkUpdateDTO {
+public class ShortLinkUpdateReqDTO {
 
     /**
      * 原始链接
@@ -26,6 +26,11 @@ public class ShortLinkUpdateDTO {
      * 完整短链接
      */
     private String fullShortUrl;
+
+    /**
+     * 原始分组标识
+     */
+    private String originGid;
 
     /**
      * 分组标识

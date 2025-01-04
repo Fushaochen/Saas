@@ -9,7 +9,7 @@ import org.fsc.saas.admin.remote.ShortLinkRemoteService;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkBatchCreateReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.admin.remote.dto.req.ShortLinkPageReqDTO;
-import org.fsc.saas.admin.remote.dto.req.ShortLinkUpdateDTO;
+import org.fsc.saas.admin.remote.dto.req.ShortLinkUpdateReqDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkBaseInfoRespDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkBatchCreateRespDTO;
 import org.fsc.saas.admin.remote.dto.resp.ShortLinkCreateRespDTO;
@@ -59,7 +59,7 @@ public class ShortLinkController {
     }
 
     @PostMapping("/api/saas/admin/v1/update")
-    public Result<Void> updateShortLink(@RequestBody ShortLinkUpdateDTO requestParam){
+    public Result<Void> updateShortLink(@RequestBody ShortLinkUpdateReqDTO requestParam){
         shortLinkRemoteService.updateShortLink(requestParam);
         return Results.success();
     }
