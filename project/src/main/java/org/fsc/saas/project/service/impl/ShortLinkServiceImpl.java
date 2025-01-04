@@ -2,14 +2,10 @@ package org.fsc.saas.project.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.Week;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -36,7 +32,6 @@ import org.fsc.saas.project.dto.req.ShortLinkCreateReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkPageReqDTO;
 import org.fsc.saas.project.dto.req.ShortLinkUpdateReqDTO;
 import org.fsc.saas.project.dto.resp.*;
-import org.fsc.saas.project.mq.producer.DelayShortLinkStatsProducer;
 import org.fsc.saas.project.mq.producer.ShortLinkStatsSaveProducer;
 import org.fsc.saas.project.service.LinkStatsTodayService;
 import org.fsc.saas.project.service.ShortLinkService;
@@ -63,7 +58,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.fsc.saas.project.common.constant.RedisKeyConstant.*;
-import static org.fsc.saas.project.common.constant.ShortLinkConstant.AMAP_REMOTE_URL;
 
 /**
  * ClassName:ShortLinkServ1iceImpl
