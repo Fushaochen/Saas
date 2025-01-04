@@ -204,6 +204,16 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
             baseMapper.delete(updateWrapper);
             baseMapper.insert(shortLinkDO);
         }
+        if(!Objects.equals(hasShortLink.getValidDateType(), requestParam.getValidDateType())
+                || !Objects.equals(hasShortLink.getValidDate(), requestParam.getValidDate())){
+            stringRedisTemplate.delete(String.format(GOTO_SHORT_LINK_KEY, requestParam.getFullShortUrl()));
+            if(hasShortLink.getValidDate() != null && hasShortLink.getValidDate().before(new Date())){
+                if(Objects.equals(requestParam.getValidDateType(), VailDateTypeEnum.PERMANENT.getType())
+                || requestParam.getValidDate().after(new Date())){
+                    stringRedisTemplate.delete(String.format(GOTO_IS_NULL_SHORT_LINK_KEY, requestParam.getFullShortUrl()));
+                }
+            }
+        }
     }
 
     @SneakyThrows
